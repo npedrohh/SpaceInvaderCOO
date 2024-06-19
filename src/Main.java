@@ -327,8 +327,6 @@ public class Main {
 			
 			/* desenhando inimigo 1*/
 			
-			if(enemyList.get(0) instanceof Enemy2) System.out.println(enemyList.get(0).getY());
-			
 			for(IEnemy e : enemyList) {
 				
 				e.render();

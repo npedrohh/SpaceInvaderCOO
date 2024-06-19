@@ -361,8 +361,8 @@ class Enemy1 extends Enemy {
 		
 		if(this.getState() == EXPLODING){
 			
-			double alpha = (System.currentTimeMillis() - this.getExplosionStart()) / 
-					(this.getExplosionEnd() - this.getExplosionStart());
+			double alpha = (System.currentTimeMillis() - this.getExplosionStart()) / (this.getExplosionEnd() - this.getExplosionStart());
+			if(alpha > 1) alpha = 1;
 			GameLib.drawExplosion(this.getX(), this.getY(), alpha);
 		}
 		
@@ -428,8 +428,6 @@ class Enemy2 extends Enemy {
 		this.setAngle(this.getRV() * delta);
 		
 		double threshold = GameLib.HEIGHT * 0.30;	
-		
-		System.out.println(this.getY());
 		
 		if(previousY < threshold && this.getY() >= threshold) {
 			
@@ -518,6 +516,7 @@ class Enemy2 extends Enemy {
 			
 			double alpha = (System.currentTimeMillis() - this.getExplosionStart()) / 
 					(this.getExplosionEnd() - this.getExplosionStart());
+			if(alpha > 1) alpha = 1;
 			GameLib.drawExplosion(this.getX(), this.getY(), alpha);
 		}
 		
