@@ -1,6 +1,15 @@
 import java.awt.Color;
 import java.util.*;
 
+import Entities.Enemy1;
+import Entities.Enemy2;
+import Entities.ICharacter;
+import Entities.IEnemy;
+import Entities.IProjectile;
+import Entities.Player;
+import Entities.Projectile;
+import GameLibPackage.GameLib;
+
 public class Main {
 	
 	/* Constantes relacionadas aos estados que os elementos   */
