@@ -1,19 +1,15 @@
 import java.awt.Color;
 import java.util.*;
-
-import Entities.Enemy1;
-import Entities.Enemy2;
-import Entities.ICharacter;
-import Entities.IEnemy;
-import Entities.IProjectile;
-import Entities.Player;
-import Entities.Projectile;
-import GameLibPackage.GameLib;
+import Entities.*;
+import GameLibPackage.*;
 
 public class Main {
 	
 	/* Constantes relacionadas aos estados que os elementos   */
 	/* do jogo (player, projeteis ou inimigos) podem assumir. */
+	
+	
+	// sseria bom deletar essas constantes da main!!!
 	
 	public static final int INACTIVE = 0;
 	public static final int ACTIVE = 1;
