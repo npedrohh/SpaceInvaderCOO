@@ -264,12 +264,10 @@ public class Main {
 			/* Verificando entrada do usuário (teclado) */
 			/********************************************/
 			
+			player.update(delta);
+			
 			if(player.getState() == ACTIVE){
 				
-				if(GameLib.iskeyPressed(GameLib.KEY_UP)) player.setY(player.getY() - delta * player.getVY());
-				if(GameLib.iskeyPressed(GameLib.KEY_DOWN)) player.setY(player.getY() + delta * player.getVY());
-				if(GameLib.iskeyPressed(GameLib.KEY_LEFT)) player.setX(player.getX() - delta * player.getVX());
-				if(GameLib.iskeyPressed(GameLib.KEY_RIGHT)) player.setX(player.getX() + delta * player.getVX());
 				if(GameLib.iskeyPressed(GameLib.KEY_CONTROL)) {
 					
 					if(currentTime > player.getNextShot()) {

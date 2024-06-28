@@ -40,4 +40,15 @@ public class Player extends Character {
 			GameLib.drawPlayer(this.getX(), this.getY(), this.getRadius());
 		}
 	}
+	
+	public void update(long delta) {
+		
+		if(this.getState() == ACTIVE){
+			
+			if(GameLib.iskeyPressed(GameLib.KEY_UP)) this.setY(this.getY() - delta * this.getVY());
+			if(GameLib.iskeyPressed(GameLib.KEY_DOWN)) this.setY(this.getY() + delta * this.getVY());
+			if(GameLib.iskeyPressed(GameLib.KEY_LEFT)) this.setX(this.getX() - delta * this.getVX());
+			if(GameLib.iskeyPressed(GameLib.KEY_RIGHT)) this.setX(this.getX() + delta * this.getVX());
+		}
+	}
 }

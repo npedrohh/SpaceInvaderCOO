@@ -65,4 +65,16 @@ abstract class Entity implements IEntity {
 		
 		this.Y = Y;
 	}
+
+	public void setVX(double vX) {
+		VX = vX;
+	}
+
+	public void setVY(double vY) {
+		VY = vY;
+	}
+
+	public void setRadius(double radius) {
+		this.radius = radius;
+	}
 }

@@ -12,4 +12,5 @@ public interface ICharacter extends IEntity {
 	public void setNextShot(double next_shot);
 	public boolean isColliding(IEntity e);
 	public void explode();
+	public void update(long delta);
 }
