@@ -13,7 +13,6 @@ public class Player extends Character {
 		
 		super(state, X, Y, VX, VY, radius, explosion_start, explosion_end, next_shot);
 	}
-
 	
 	public boolean isInside() {
 		
@@ -73,5 +72,8 @@ public class Player extends Character {
 	public void morreu(){
 		this.setVidas(getVidas()-1);
 	}
+
+	//cria a interface gráfica do sistema de vidas//
+	
 
 }
