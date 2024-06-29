@@ -5,11 +5,15 @@ import java.awt.Color;
 import GameLibPackage.GameLib;
 
 public class Player extends Character {
+	
+	private int vidas; //atributo especial do player, o sistema de vidas//
+	
 	public Player(int state, double X, double Y, double VX, double VY, double radius, double explosion_start, 
 			double explosion_end, double next_shot) {
 		
 		super(state, X, Y, VX, VY, radius, explosion_start, explosion_end, next_shot);
 	}
+
 	
 	public boolean isInside() {
 		
@@ -51,4 +55,23 @@ public class Player extends Character {
 			if(GameLib.iskeyPressed(GameLib.KEY_RIGHT)) this.setX(this.getX() + delta * this.getVX());
 		}
 	}
+
+	//sistema de vidas//
+
+	private void setVidas(int vidas){
+		this.vidas = vidas;
+	}
+
+	public int getVidas(){
+		return this.vidas;
+	}
+
+	public void iniciaVidas(){
+		this.vidas = 3;
+	}
+
+	public void morreu(){
+		this.setVidas(getVidas()-1);
+	}
+
 }
