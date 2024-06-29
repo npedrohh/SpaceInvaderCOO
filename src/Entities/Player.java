@@ -35,7 +35,7 @@ public class Player extends Character {
 	
 	public void render() {
 
-		this.sistemaVidas();
+		//this.sistemaVidas();//
 
 		if(this.getState() == EXPLODING){
 			
