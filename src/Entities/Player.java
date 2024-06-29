@@ -7,6 +7,8 @@ import GameLibPackage.GameLib;
 public class Player extends Character {
 	
 	private int vidas; //atributo especial do player, o sistema de vidas//
+	public int widthLife;
+	public int heightLife;
 	
 	public Player(int state, double X, double Y, double VX, double VY, double radius, double explosion_start, 
 			double explosion_end, double next_shot) {
@@ -24,14 +26,17 @@ public class Player extends Character {
 	}	
 	
 	public void explode() {
-		
+
+		this.morreu();
 		this.setState(EXPLODING);
 		this.setExplosionStart(System.currentTimeMillis());
 		this.setExplosionEnd(System.currentTimeMillis() + 2000);
 	}
 	
 	public void render() {
-		
+
+		this.sistemaVidas();
+
 		if(this.getState() == EXPLODING){
 			
 			double alpha = (System.currentTimeMillis() - this.getExplosionStart()) / (this.getExplosionEnd() - this.getExplosionStart());
@@ -73,7 +78,37 @@ public class Player extends Character {
 		this.setVidas(getVidas()-1);
 	}
 
+	public void setWidthLife(int widthLife) {
+		this.widthLife = widthLife;
+	}
+
+	public void setHeightLife(int heightLife) {
+		this.heightLife = heightLife;
+	}
+
+	public int getWidthLife() {
+		return widthLife;
+	}
+
+	public int getHeightLife() {
+		return heightLife;
+	}
+
 	//cria a interface gráfica do sistema de vidas//
-	
+
+public void sistemaVidas(){
+
+	if(this.getVidas()==3){
+		GameLib.drawHeart(9, 9);
+		GameLib.drawHeart(50, 50);
+		GameLib.drawHeart(70, 70);
+	}else if(this.getVidas()==2){
+		GameLib.drawHeart(50, 50);
+		GameLib.drawHeart(70, 70);
+	}else if(this.getVidas()==1){
+		GameLib.drawHeart(70, 70);
+	}
+
+}
 
 }
