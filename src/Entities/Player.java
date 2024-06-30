@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import GameLibPackage.GameLib;
 
-public class Player extends Character {
+public class Player extends Character{
 	
 	private int vidas; //atributo especial do player, o sistema de vidas//
 	public int widthLife;
@@ -42,6 +42,9 @@ public class Player extends Character {
 			
 			double alpha = (System.currentTimeMillis() - this.getExplosionStart()) / (this.getExplosionEnd() - this.getExplosionStart());
 			GameLib.drawExplosion(this.getX(), this.getY(), alpha);
+		}else if(this.getVidas()<=0){
+			GameLib.drawGameOver();
+			this.setState(INACTIVE);
 		}
 		else{
 			
@@ -71,46 +74,17 @@ public class Player extends Character {
 		return this.vidas;
 	}
 
-	public void iniciaVidas(){
+	private void iniciaVidas(){
 		this.vidas = 3;
 	}
 
 	public void morreu(){
 		this.setVidas(getVidas()-1);
+		if (this.getVidas() <= 0){
+			this.setState(INACTIVE);
+		}
 	}
 
-	public void setWidthLife(int widthLife) {
-		this.widthLife = widthLife;
-	}
-
-	public void setHeightLife(int heightLife) {
-		this.heightLife = heightLife;
-	}
-
-	public int getWidthLife() {
-		return widthLife;
-	}
-
-	public int getHeightLife() {
-		return heightLife;
-	}
-
-	//cria a interface gráfica do sistema de vidas//
-
-/*public void sistemaVidas(){
-
-	if(this.getVidas()==3){
-		GameLib.drawHeart(9, 9);
-		GameLib.drawHeart(50, 50);
-		GameLib.drawHeart(70, 70);
-	}else if(this.getVidas()==2){
-		GameLib.drawHeart(50, 50);
-		GameLib.drawHeart(70, 70);
-	}else if(this.getVidas()==1){
-		GameLib.drawHeart(70, 70);
-	}
-
-}*/
 
 public void sistemaVidas(){
 	int heartX = 30; // posição X inicial do primeiro coração

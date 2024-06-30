@@ -142,6 +142,13 @@ public class GameLib {
         g.fillPolygon(triangleX, triangleY, 3);
     }
 
+	public static void drawGameOver() {
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, WIDTH, HEIGHT);
+		g.setColor(Color.RED);
+		g.drawString("GAME OVER", WIDTH / 2 - 150, HEIGHT / 2);
+	}
+
 
 	public static void fillRect(double cx, double cy, double width, double height){
 		
