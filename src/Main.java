@@ -120,11 +120,6 @@ public class Main {
 			
 			currentTime = System.currentTimeMillis();
 
-			if(player.getState()==INACTIVE){
-				System.out.println("inativo");;
-
-			}
-			
 			/***************************/
 			/* Verificação de colisões */
 			/***************************/
