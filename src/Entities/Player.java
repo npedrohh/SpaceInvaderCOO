@@ -29,24 +29,26 @@ public class Player extends Character{
 	public void explode() {
 
 		this.morreu();
+		if (this.getState()!=INACTIVE){
 		this.setState(EXPLODING);
 		this.setExplosionStart(System.currentTimeMillis());
 		this.setExplosionEnd(System.currentTimeMillis() + 2000);
+		}
 	}
 	
 	public void render() {
 
 		this.sistemaVidas();
 
+		if(this.getVidas()<=0){
+			GameLib.drawGameOver();
+			this.setState(INACTIVE);
+		}
 		if(this.getState() == EXPLODING){
 			
 			double alpha = (System.currentTimeMillis() - this.getExplosionStart()) / (this.getExplosionEnd() - this.getExplosionStart());
 			GameLib.drawExplosion(this.getX(), this.getY(), alpha);
-		}else if(this.getVidas()<=0){
-			GameLib.drawGameOver();
-			this.setState(INACTIVE);
-		}
-		else{
+		}	if(this.getState()==ACTIVE){
 			
 			GameLib.setColor(Color.BLUE);
 			GameLib.drawPlayer(this.getX(), this.getY(), this.getRadius());
@@ -80,9 +82,6 @@ public class Player extends Character{
 
 	public void morreu(){
 		this.setVidas(getVidas()-1);
-		if (this.getVidas() <= 0){
-			this.setState(INACTIVE);
-		}
 	}
 
 
