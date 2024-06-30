@@ -130,7 +130,7 @@ public class Main {
 			/* Já a variável "currentTime" nos dá o timestamp atual.  */
 			
 			currentTime = System.currentTimeMillis();
-			
+
 			/***************************/
 			/* Verificação de colisões */
 			/***************************/
@@ -325,6 +325,12 @@ public class Main {
 					player.setState(ACTIVE);
 				}
 			}
+
+			/* mostra tela de GameOver e termina o jogo após 5s */
+			if (player.getState()==INACTIVE && currentTime > player.getExplosionEnd() + 5000){
+				running = false;
+
+			}
 			
 			/********************************************/
 			/* Verificando entrada do usuário (teclado) */
@@ -379,7 +385,6 @@ public class Main {
 			}	
 			
 			/* desenhando player */
-			
 			player.render();
 			
 			/* deenhando projeteis (player) */

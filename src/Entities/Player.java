@@ -4,11 +4,17 @@ import java.awt.Color;
 
 import GameLibPackage.GameLib;
 
-public class Player extends Character {
+public class Player extends Character{
+	
+	private int vidas; //atributo especial do player, o sistema de vidas//
+	public int widthLife;
+	public int heightLife;
+	
 	public Player(int state, double X, double Y, double VX, double VY, double radius, double explosion_start, 
 			double explosion_end, double next_shot) {
 		
 		super(state, X, Y, VX, VY, radius, explosion_start, explosion_end, next_shot);
+		this.iniciaVidas();
 	}
 	
 	public boolean isInside() {
@@ -21,29 +27,37 @@ public class Player extends Character {
 	}	
 	
 	public void explode() {
-		
+
+		this.morreu();
+		if (this.getState()!=INACTIVE){
 		this.setState(EXPLODING);
 		this.setExplosionStart(System.currentTimeMillis());
 		this.setExplosionEnd(System.currentTimeMillis() + 2000);
+		}
 	}
 	
-	public void render() {
-		
-		if(this.getState() == EXPLODING){
-			
-			double alpha = (System.currentTimeMillis() - this.getExplosionStart()) / (this.getExplosionEnd() - this.getExplosionStart());
-			GameLib.drawExplosion(this.getX(), this.getY(), alpha);
-		}
-		else if(this.getBuff() == 1){
-			
-			GameLib.setColor(Color.ORANGE);
-			GameLib.drawPlayer(this.getX(), this.getY(), this.getRadius());
-		}
-		else{
-			GameLib.setColor(Color.BLUE);
-			GameLib.drawPlayer(this.getX(), this.getY(), this.getRadius());
-		}
-	}
+  public void render() {
+
+     this.sistemaVidas();
+
+     if(this.getVidas()<=0){
+         GameLib.drawGameOver();
+         this.setState(INACTIVE);
+     }
+     if(this.getState() == EXPLODING){
+         double alpha = (System.currentTimeMillis() - this.getExplosionStart()) / (this.getExplosionEnd() - this.getExplosionStart());
+         GameLib.drawExplosion(this.getX(), this.getY(), alpha);
+     }    
+     if(this.getState()==ACTIVE){
+         if(this.getBuff() == 1){
+            GameLib.setColor(Color.ORANGE);
+            GameLib.drawPlayer(this.getX(), this.getY(), this.getRadius());
+         } else{
+            GameLib.setColor(Color.BLUE);
+            GameLib.drawPlayer(this.getX(), this.getY(), this.getRadius());
+           }
+     }
+    }
 	
 	public void update(long delta) {
 		
@@ -55,4 +69,34 @@ public class Player extends Character {
 			if(GameLib.iskeyPressed(GameLib.KEY_RIGHT)) this.setX(this.getX() + delta * this.getVX());
 		}
 	}
+
+	//sistema de vidas//
+
+	private void setVidas(int vidas){
+		this.vidas = vidas;
+	}
+
+	public int getVidas(){
+		return this.vidas;
+	}
+
+	private void iniciaVidas(){
+		this.vidas = 3;
+	}
+
+	public void morreu(){
+		this.setVidas(getVidas()-1);
+	}
+
+
+public void sistemaVidas(){
+	int heartX = 30; // posição X inicial do primeiro coração
+	int heartY = 60; // posição Y inicial dos corações
+	int heartSpacing = 30; // espaço entre os corações
+
+	for(int i = 0; i < this.getVidas(); i++) {
+		GameLib.drawHeart(heartX + i * heartSpacing, heartY);
+	}
+}
+
 }

@@ -117,7 +117,39 @@ public class GameLib {
 		GameLib.drawCircle(x, y, alpha * alpha * 40);
 		GameLib.drawCircle(x, y, alpha * alpha * 40 + 1);
 	}
-	
+
+	/* implementa desenho de coração */
+	public static void drawHeart(double x, double y) {
+        int heartWidth = 20; // Largura do coração
+        int heartHeight = 20; // Altura do coração
+
+        // Desenhar os dois círculos superiores
+        g.setColor(Color.RED);
+        g.fillOval((int) (x - heartWidth / 2), (int) (y - heartHeight / 2), heartWidth / 2, heartHeight / 2);
+        g.fillOval((int) x, (int) (y - heartHeight / 2), heartWidth / 2, heartHeight / 2);
+
+        // Desenhar o triângulo inferior
+        int[] triangleX = {
+            (int) (x - heartWidth / 2),
+            (int) (x + heartWidth / 1.8),
+            (int) x
+        };
+        int[] triangleY = {
+            (int) (y - heartHeight / 4),
+            (int) (y - heartHeight / 4),
+            (int) (y + heartHeight / 2.7)
+        };
+        g.fillPolygon(triangleX, triangleY, 3);
+    }
+
+	public static void drawGameOver() {
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, WIDTH, HEIGHT);
+		g.setColor(Color.RED);
+		g.drawString("GAME OVER", WIDTH / 2 - 150, HEIGHT / 2);
+	}
+
+
 	public static void fillRect(double cx, double cy, double width, double height){
 		
 		int x = (int) Math.round(cx - width/2);
