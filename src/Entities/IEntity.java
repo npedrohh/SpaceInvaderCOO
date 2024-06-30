@@ -7,6 +7,8 @@ public interface IEntity {
 	public double getVX();
 	public double getVY();
 	public double getRadius();
+	public void setVX(double VX);
+	public void setVY(double VY);
 	public boolean isInside();
 	public void render();
 }

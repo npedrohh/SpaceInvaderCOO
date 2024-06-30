@@ -4,6 +4,8 @@ public interface ICharacter extends IEntity {
 	public double getExplosionStart();
 	public double getExplosionEnd();
 	public double getNextShot();
+	public void setBuff(int buff);
+	public int getBuff();
 	public void setState(int state);
 	public void setX(double X);
 	public void setY(double Y);

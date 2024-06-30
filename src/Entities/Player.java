@@ -36,24 +36,28 @@ public class Player extends Character{
 		}
 	}
 	
-	public void render() {
+  public void render() {
 
-		this.sistemaVidas();
+     this.sistemaVidas();
 
-		if(this.getVidas()<=0){
-			GameLib.drawGameOver();
-			this.setState(INACTIVE);
-		}
-		if(this.getState() == EXPLODING){
-			
-			double alpha = (System.currentTimeMillis() - this.getExplosionStart()) / (this.getExplosionEnd() - this.getExplosionStart());
-			GameLib.drawExplosion(this.getX(), this.getY(), alpha);
-		}	if(this.getState()==ACTIVE){
-			
-			GameLib.setColor(Color.BLUE);
-			GameLib.drawPlayer(this.getX(), this.getY(), this.getRadius());
-		}
-	}
+     if(this.getVidas()<=0){
+         GameLib.drawGameOver();
+         this.setState(INACTIVE);
+     }
+     if(this.getState() == EXPLODING){
+         double alpha = (System.currentTimeMillis() - this.getExplosionStart()) / (this.getExplosionEnd() - this.getExplosionStart());
+         GameLib.drawExplosion(this.getX(), this.getY(), alpha);
+     }    
+     if(this.getState()==ACTIVE){
+         if(this.getBuff() == 1){
+            GameLib.setColor(Color.ORANGE);
+            GameLib.drawPlayer(this.getX(), this.getY(), this.getRadius());
+         } else{
+            GameLib.setColor(Color.BLUE);
+            GameLib.drawPlayer(this.getX(), this.getY(), this.getRadius());
+           }
+     }
+    }
 	
 	public void update(long delta) {
 		
