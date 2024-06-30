@@ -34,8 +34,12 @@ public class Player extends Character {
 			double alpha = (System.currentTimeMillis() - this.getExplosionStart()) / (this.getExplosionEnd() - this.getExplosionStart());
 			GameLib.drawExplosion(this.getX(), this.getY(), alpha);
 		}
-		else{
+		else if(this.getBuff() == 1){
 			
+			GameLib.setColor(Color.ORANGE);
+			GameLib.drawPlayer(this.getX(), this.getY(), this.getRadius());
+		}
+		else{
 			GameLib.setColor(Color.BLUE);
 			GameLib.drawPlayer(this.getX(), this.getY(), this.getRadius());
 		}

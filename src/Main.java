@@ -50,6 +50,17 @@ public class Main {
 		LinkedList<IEnemy> enemyList = new LinkedList<>();
 		ArrayList<IEnemy> lastEnemyArray = new ArrayList<>();
 		
+		/* variáveis dos coletáveis */
+
+		/* PowerUp1 */
+
+		LinkedList<ICollectable> powerUp1List = new LinkedList<>();
+		ArrayList<ICollectable> lastPowerUp1Array = new ArrayList<>();
+		ICollectable apu1 = new PowerUp1();
+		final int MAX_POWERUPS1 = 1;
+
+		// LinkedList<ICollectable> powerUp2List = new LinkedList<>();
+
 		/* variáveis dos inimigos tipo 2 */
 		
 
@@ -130,14 +141,14 @@ public class Main {
 				
 				for(IProjectile p : e_projectileList) {
 					
-					if(player.isColliding(p)) player.explode();
+					if(player.isColliding(p)) {player.explode(); player.setBuff(0); apu1.deactivate(player);}
 				}
 			
 				/* colisões player - inimigos */
 					
 				for(IEnemy e : enemyList) {
 					
-					if(player.isColliding(e)) player.explode();
+					if(player.isColliding(e)) {player.explode(); player.setBuff(0); apu1.deactivate(player);}
 				}
 			}
 			
@@ -225,6 +236,40 @@ public class Main {
 				
 			}
 			
+			/* power-ups (PowerUp1) */
+
+			Iterator<ICollectable> pu1_iterator = powerUp1List.iterator();
+
+			while (pu1_iterator.hasNext()) {
+				
+    			ICollectable pu1 = pu1_iterator.next();
+    
+				if (pu1.getState() == ACTIVE){
+
+					if (player.getBuff() == 1 && apu1.isExpired() == true){
+						player.setBuff(0);
+						System.out.println("deactivated1");
+						apu1.deactivate(player);	
+					}
+
+					if (player.isColliding(pu1) && player.getBuff() != 1){
+						apu1 = pu1;
+						apu1.activate(player);
+						player.setBuff(1);
+
+						pu1_iterator.remove();
+					}else{
+
+						pu1.update(delta/5);
+
+						if(!pu1.isInside()) {
+							
+							pu1_iterator.remove();
+						}
+					}
+				}
+			}
+
 			/* verificando se novos inimigos devem ser "lançados" */
 			
 			if(lastEnemyArray.isEmpty()) {
@@ -235,7 +280,14 @@ public class Main {
 				e1.setNextEnemy(currentTime+500);
 				e2.setNextEnemy((long) (System.currentTimeMillis() + 3000 + Math.random() * 3000));
 			}
-			
+
+			if (lastPowerUp1Array.isEmpty()) {
+
+				ICollectable pu1 = new PowerUp1(lastPowerUp1Array);
+
+				pu1.setNextCollectable(currentTime + 5000);
+
+			}
 			Iterator<IEnemy> le_iterator = lastEnemyArray.iterator();
 			
 			while(le_iterator.hasNext()) {
@@ -249,7 +301,21 @@ public class Main {
 					enemyList.add(le.spawn());
 				}
 			}
+
+			Iterator<ICollectable> lpu1_iterator = lastPowerUp1Array.iterator();
+
+			if(lpu1_iterator.hasNext() && powerUp1List.size() < MAX_POWERUPS1){
+			
+				ICollectable lpu1 = lpu1_iterator.next();	
+						
+				lpu1.updateLastCollectable(powerUp1List, lastPowerUp1Array);
+			
+				if(lpu1.isSpawnable(powerUp1List, lastPowerUp1Array)) {
 					
+					powerUp1List.add(lpu1.spawn());
+				}
+			}
+
 			/* Verificando se a explosão do player já acabou.         */
 			/* Ao final da explosão, o player volta a ser controlável */
 			if(player.getState() == EXPLODING){
@@ -334,6 +400,13 @@ public class Main {
 				
 				e.render();
 			}
+
+			/* desenhando powerUp1 */
+
+			for (ICollectable pu1 : powerUp1List) {
+				pu1.render();
+			}
+
 			
 			/* chamama a display() da classe GameLib atualiza o desenho exibido pela interface do jogo. */
 			

@@ -8,6 +8,8 @@ abstract class Character extends Entity implements ICharacter {
 	private double explosion_start;
 	private double explosion_end;
 	private double next_shot; 
+
+	private int buff;
 	
 	public Character(int state, double X, double Y, double VX, double VY, double radius, 
 			double explosion_start, double explosion_end, double next_shot) {
@@ -28,6 +30,14 @@ abstract class Character extends Entity implements ICharacter {
 
 	public double getNextShot() {
 		return next_shot;
+	}
+
+	public void setBuff(int buff) {
+		this.buff = buff;
+	}
+
+	public int getBuff() {
+		return buff;
 	}
 	
 	public void setExplosionStart(double explosion_start) {
