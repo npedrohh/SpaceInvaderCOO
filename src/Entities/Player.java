@@ -14,6 +14,7 @@ public class Player extends Character {
 			double explosion_end, double next_shot) {
 		
 		super(state, X, Y, VX, VY, radius, explosion_start, explosion_end, next_shot);
+		this.iniciaVidas();
 	}
 	
 	public boolean isInside() {
@@ -35,7 +36,7 @@ public class Player extends Character {
 	
 	public void render() {
 
-		//this.sistemaVidas();//
+		this.sistemaVidas();
 
 		if(this.getState() == EXPLODING){
 			
@@ -96,7 +97,7 @@ public class Player extends Character {
 
 	//cria a interface gráfica do sistema de vidas//
 
-public void sistemaVidas(){
+/*public void sistemaVidas(){
 
 	if(this.getVidas()==3){
 		GameLib.drawHeart(9, 9);
@@ -109,6 +110,16 @@ public void sistemaVidas(){
 		GameLib.drawHeart(70, 70);
 	}
 
+}*/
+
+public void sistemaVidas(){
+	int heartX = 30; // posição X inicial do primeiro coração
+	int heartY = 60; // posição Y inicial dos corações
+	int heartSpacing = 30; // espaço entre os corações
+
+	for(int i = 0; i < this.getVidas(); i++) {
+		GameLib.drawHeart(heartX + i * heartSpacing, heartY);
+	}
 }
 
 }

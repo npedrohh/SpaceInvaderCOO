@@ -118,9 +118,10 @@ public class GameLib {
 		GameLib.drawCircle(x, y, alpha * alpha * 40 + 1);
 	}
 
+	/* implementa desenho de coração */
 	public static void drawHeart(double x, double y) {
-        int heartWidth = 40; // Largura do coração
-        int heartHeight = 40; // Altura do coração
+        int heartWidth = 20; // Largura do coração
+        int heartHeight = 20; // Altura do coração
 
         // Desenhar os dois círculos superiores
         g.setColor(Color.RED);
@@ -129,14 +130,14 @@ public class GameLib {
 
         // Desenhar o triângulo inferior
         int[] triangleX = {
-            (int) (x - heartWidth / 1.98),
-            (int) (x + heartWidth / 1.83),
+            (int) (x - heartWidth / 2),
+            (int) (x + heartWidth / 1.8),
             (int) x
         };
         int[] triangleY = {
             (int) (y - heartHeight / 4),
             (int) (y - heartHeight / 4),
-            (int) (y + heartHeight / 2)
+            (int) (y + heartHeight / 2.7)
         };
         g.fillPolygon(triangleX, triangleY, 3);
     }
