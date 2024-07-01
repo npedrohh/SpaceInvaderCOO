@@ -1,3 +1,17 @@
+/*********************************************************************/
+/**   ACH2003 - Computação Orientada a Objetos                      **/
+/**   EACH-USP - Primeiro Semestre de 2024                          **/
+/**   Turma 04 - Prof. Flávio Coutinho                              **/
+/**                                                                 **/
+/**   Exercicio-Programa                                            **/
+/**                                                                 **/
+/**   Pedro Henrique Resnitzky Barbedo            14657691          **/
+/**   Aline Crispim de Moraes                     14567051          **/
+/**   Daniela Yumi Takara                         13659997          **/
+/**   Giovanna Almeida Albuquerque                13657515          **/
+/**                                                                 **/
+/*********************************************************************/
+
 import java.awt.Color;
 import java.util.*;
 import Entities.*;
