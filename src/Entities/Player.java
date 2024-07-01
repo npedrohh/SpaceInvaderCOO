@@ -7,8 +7,6 @@ import GameLibPackage.GameLib;
 public class Player extends Character{
 	
 	private int vidas; //atributo especial do player, o sistema de vidas//
-	public int widthLife;
-	public int heightLife;
 	
 	public Player(int state, double X, double Y, double VX, double VY, double radius, double explosion_start, 
 			double explosion_end, double next_shot) {
