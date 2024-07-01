@@ -63,7 +63,6 @@ public class Main {
 		
 		LinkedList<IEnemy> enemyList = new LinkedList<>();
 		ArrayList<IEnemy> lastEnemyArray = new ArrayList<>();
-		
 		/* variáveis dos coletáveis */
 
 		/* PowerUp1 */
@@ -247,7 +246,6 @@ public class Main {
 
 					if (player.getBuff() == 1 && apu1.isExpired() == true){
 						player.setBuff(0);
-						System.out.println("deactivated1");
 						apu1.deactivate(player);	
 					}
 
@@ -270,15 +268,16 @@ public class Main {
 			}
 
 			/* verificando se novos inimigos devem ser "lançados" */
-			
 			if(lastEnemyArray.isEmpty()) {
-				
 				IEnemy e1 = new Enemy1(lastEnemyArray);
-				IEnemy e2 = new Enemy2(lastEnemyArray);
+				IEnemy e2 = new Enemy3(lastEnemyArray);
+				
 				
 				e1.setNextEnemy(currentTime+500);
-				e2.setNextEnemy((long) (System.currentTimeMillis() + 3000 + Math.random() * 3000));
+				e2.setNextEnemy((long) (System.currentTimeMillis() + 3 + Math.random() * 3));
 			}
+
+
 
 			if (lastPowerUp1Array.isEmpty()) {
 
@@ -289,7 +288,7 @@ public class Main {
 			}
 			Iterator<IEnemy> le_iterator = lastEnemyArray.iterator();
 			
-			while(le_iterator.hasNext()) {
+			while(le_iterator.hasNext()  && (enemyList.size() < 5)) {
 			
 			IEnemy le = le_iterator.next();	
 						
